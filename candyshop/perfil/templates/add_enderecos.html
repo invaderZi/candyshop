@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'perfil/css/add_endereco.css' %}">  <!-- Adicione o CSS do seu novo aplicativo aqui -->
+{% endblock %}
+
+{% block 'body' %}
+<div class="centered-text">
+    Endereço
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="alert {{message.tags}}" id="message">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+<br>
+<br>
+<div class="endereco-container">
+    <form method="POST" action="{% url 'add_endereco' endereco_id %}">
+        
+        {% csrf_token %}
+        <div class="endereco-info">            
+            <div class="endereco-info-group">
+                <div>
+                    <label>Rua:</label>
+                    {{ form.rua }}
+                </div>
+                <div>
+                    <label>Numero:</label>
+                    {{ form.numero }}               
+                </div>
+            </div>
+            <div class="endereco-info-group">
+                <div>
+                    <label>Cep:</label>
+                    {{ form.cep }}
+                </div>
+                <div>
+                    <label>Estado:</label>
+                    {{ form.estado }}
+                </div>
+            </div>
+            <div class="endereco-info-group">
+                <div>
+                    <label>Cidade:</label>                    
+                    <select value-selected="{{ form.cidade.value }}" name="cidade" required="" id="id_cidade">
+                    </select>
+                </div>
+            </div>
+            <div class="endereco-info-group">
+                <div id="complemento">
+                    <label>Complemento:</label>                    
+                    <textarea name="complemento" id="id_complemento" cols="30" rows="5" maxlength="255">{{ form.complemento.value }}</textarea>
+                    
+                </div>
+            </div>            
+        </div>            
+        <input class="button-actions" type="submit" value="Salvar endereco">
+    </form>
+</div>
+{% block 'javascript' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    
+    function buscaCidades(selecionado){
+        var uf = $('#id_estado')[0].value;
+        $.ajax({
+            url: "/perfil/get_cidades/"+uf+"/",
+            success: function(data) {
+                var select = $('#id_cidade');
+                select.empty();
+                $.each(data, function(index, value) {
+                    select.append('<option value="' + value.nome + '">' + value.nome + '</option>');
+                });
+            },
+            complete: function(){
+                if(selecionado != ''){
+                    $('#id_cidade')[0].value = selecionado
+                }
+            }
+        });
+    }
+    if($('#id_estado')[0].value != ''){
+        //chama a function buscaCidades
+        buscaCidades($('#id_cidade')[0].getAttribute('value-selected'));
+    }
+    $('#id_estado').change(function() {
+        buscaCidades('');
+    });
+
+    
+    
+});
+</script>
+{% endblock %}
+{% endblock %}
+
+

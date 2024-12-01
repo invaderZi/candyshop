@@ -1,0 +1,148 @@
+
+.carrinho-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .carrinho-card {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 80%;
+    box-shadow: inset 0px -100px 100px -62px rgba(0,0,0,0.1);
+    padding-bottom: 16px;
+    align-items: center;
+  }
+  
+  .carrinho-card img {
+    width: 200px;
+    height: 155px;
+    float: left;
+  }
+  
+  .carrinho-container-descricao {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    justify-content: center;
+    padding-left: 20px;
+    float: left;
+  }
+  
+  .carrinho-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .carrinho-prod-descricao {
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  .carrinho-line-price-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .carrinho-prod-preco {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .carrinho-actions img {
+    width: 75px;
+    height: 75px;
+}
+    
+  .img-prod {
+    border: 1px solid black;
+    box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.6);
+  }
+  
+  
+.combo-container{
+    display: flex;
+    justify-content: center;
+    float: left;
+}
+
+.total-item{
+    float: left;
+}
+
+.infos-prods{
+    width:60%;
+}
+
+.combo-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.combo-button {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0px 4px 3px 3px;
+    cursor: pointer;
+    background-color: #d8d8d8;
+}
+
+.combo-input {
+    width: 72px;
+    text-align: center;
+    font-size: 29px;
+    background-color: #d8d8d8;
+    border: 1px solid black;
+}
+
+.butonqtd{
+    border: 1px solid black;
+    width: 40px;
+    text-align: center;
+}
+
+.total-item p{
+    margin: 0px;
+    font-size: 20px;
+}
+
+.total-item {
+    margin-left: 25px;
+}
+
+p.price-total {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+p.carrinho-prod-descricao {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.rodape a {
+    width: 100%;
+    background-color: lightskyblue;
+    color: white;
+    padding: 5px 9px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.rodape {
+    width: 81%;
+    padding: 20px;
+    padding-left: 66%;
+}
+
+.total {
+    width: 100%;
+    font-weight: bold;
+    font-size: 22px;
+}

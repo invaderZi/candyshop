@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "CandyShop"
+version = "0.1.0"
+description = "Loja de Doces"
+authors = ["invaderzi <mail@mail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.4"
+pillow = "^10.0.0"
+requests = "^2.31.0"
+qrcode = {extras = ["pil"], version = "^7.4.2"}
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+poethepoet = "^0.22.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poe.tasks.start]
+cmd = "python.exe .\\candyshop\\manage.py runserver"
+help = "Starts the application"

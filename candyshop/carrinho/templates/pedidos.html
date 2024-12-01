@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'carrinho/css/pedidos.css' %}">
+
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="centered-text">
+    Pedidos
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert {{message.tags}}" id="message">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="container">
+    {% for pedido in pedidos %}
+        
+        <div class="pedido-card {% if pedido.Cancelado == True %} tachar {% endif %} ">
+            <a  href="{% url 'resumo_pedido' pedido.id %}">
+            <div class="dados">
+                <label class="pedido-id">Pedido: #{{pedido.id}}</label>
+                <label>Quantidade: {{pedido.CarrinhoCodigo.itens.count}}</label>
+                <div class="status">
+                    <label>Status:</label>
+                    <div id="myProgress">
+                        <div id="myBar" style="width: {{pedido.PorcentagemPedido}}%;"></div>
+                      </div>
+                </div>
+                {% if pedido.Cancelado == True %}
+                    <label class="descricao-status">Pedido Cancelado</label>
+                {% elif pedido.PorcentagemPedido <= 40 %}
+                    <label class="descricao-status">Pedido em preparação</label>
+                {% elif pedido.PorcentagemPedido > 40 and pedido.PorcentagemPedido <= 60  %}
+                    <label class="descricao-status">Pedido pronto</label>
+                {% elif pedido.PorcentagemPedido > 60 and pedido.PorcentagemPedido <= 90  %}
+                    <label class="descricao-status">Pedido a caminho</label>
+                {% elif pedido.PorcentagemPedido > 90 %}
+                    <label class="descricao-status">Pedido entregue</label>
+                {% endif %}
+            </div>
+            <div class="acao">
+                <a {% if pedido.Cancelado == False and pedido.PorcentagemPedido <= 40 %} href="{% url 'cancelapedido' pedido.id %}" {% endif %}>
+                    <img class="cancela-pedido {% if pedido.Cancelado == True or pedido.PorcentagemPedido > 40 %} imgBlur {% endif %}" src="{% static 'carrinho/img/deleted.png' %}">
+                </a>
+            </div>
+        </a>
+        </div>
+    
+    {% endfor %}
+</div>
+
+
+{% endblock %}

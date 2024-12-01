@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'carrinho/css/resumo_compra.css' %}">
+
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="centered-text">
+    Resumo da compra
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert {{message.tags}}" id="message">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+<form method="POST" action="{% url 'finalizarpedido' %}">
+    {% csrf_token %}
+    <div class="container">
+        <div class="container-dados">
+            <div class="dados">
+                <div class="endereco_entrega">
+                    <p>Endereço e Entrega</p>
+                    <div class="caixa">
+                        {% if opcao_entrega.OpcaoSelecionada == 0 %}
+                            <label class="rua">Rua {{opcao_entrega.EnderecoCodigo.rua}}</label>
+                            <label class="endereco">{{opcao_entrega.EnderecoCodigo.cidade}}, {{opcao_entrega.EnderecoCodigo.get_estado_display}}, CEP: {{opcao_entrega.EnderecoCodigo.cep}}</label>
+                            <label class="endereco">Numero {{opcao_entrega.EnderecoCodigo.numero}}, {{opcao_entrega.EnderecoCodigo.complemento}}</label>
+                        {%else%}
+                            <label class="local retirada">Deverá se direcionar a loja candyshop para retirar seu produto</label>
+                            <label class="local retirada">Endereço da loja:</label>
+                            <label class="local retirada">Rua marechal deodoro, numero 543, ao lado da praça das ilusoes.</label>         
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="pagamento">
+                    <p>Pagamento</p>
+                    <div class="caixa">
+                        <label>Pagamento escolhido: {% if opcao_pagamento.OpcaoSelecionada == 0 %}Boleto{%else%}Pix{% endif %}</label>
+                        {% if opcao_pagamento.OpcaoSelecionada == 0 %}
+                            <label>Após avançar a etapa será encaminhado o boleto para o seu e-mail</label>
+                        {%else%}
+                            <label>Após finalizar a compra o qrcode do pix será exibido em um pop-up</label>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="dados_recebedor">
+                    <p>Dados do recebedor</p>
+                    <div class="caixa">
+                        <label class="recebedor">Nome: {{user.username}}</label>
+                        <br>
+                        <label class="recebedor">Telefone: {{user.telefone}}</label>
+                        <br>
+                        <label class="recebedor">E-mail: {{user.email}}</label>
+                    </div>
+                </div>
+            </div> 
+            <div id="action">
+                <input class="button-actions" type="submit" onclick="{% if opcao_pagamento.OpcaoSelecionada == 1 %}abrirPopup(){% endif %}" value="Finalizar compra">
+            </div> 
+        </div>
+        <div id="container-produtos" >
+            <div class="produtos">
+                {% for produto_carrinho in itens_carrinho %}                
+                <div class="produto-item">
+                    {% with produto_carrinho.ProdutoCodigo.imagens.all|first as imagem %}
+                        {% if imagem %}
+                            <img class="img-prod" src="{{ imagem.imagem.url }}" alt="Imagem do Produto">
+                        {% endif %}
+                    {% endwith %}
+                    <div>
+                        <label class="nome-produto">{{produto_carrinho.ProdutoCodigo.ProdutoNome}}</label>
+                    </div>
+                    <div>
+                        <label>Quantidade: {{produto_carrinho.Quantidade}}</label>
+                    </div>
+                    <div>
+                        <label>Total do item: R$ {{ produto_carrinho.total_por_produto  }}</label>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="total">
+                <label>Total do pedido: R$ {{total_pedido}}</label>
+            </div>
+        </div>
+    </div> 
+    <div id='qrcode'></div>
+</form>
+{% block 'javascript' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function abrirPopup() {
+        var img_str = "{{ img_str }}";
+        var popup = window.open("", "Popup", "width=400,height=400");
+            popup.document.write("<html><head><title>Popup</title></head><body>");
+            popup.document.write("<img style=\"width: 355px;\" src="+img_str +" alt=\"QR Code\">");
+            popup.document.write("</body></html>");
+    }
+    
+    
+    $(document).ready(function(){
+        var divs = document.getElementById('opcoes').getElementsByTagName('div');
+
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].addEventListener('click', function() {
+                for (var j = 0; j < divs.length; j++) {
+                    divs[j].classList.remove('selected');
+                }
+                this.classList.add('selected');
+                this.getElementsByTagName('input')[0].checked = true
+                if(this.getElementsByTagName('input')[0].value == '0'){
+                    document.getElementById('enderecos').classList.remove("desabilita");
+                    document.getElementById('retirada').classList.add("desabilita");
+                }else{
+                    document.getElementById('retirada').classList.remove("desabilita");
+                    document.getElementById('enderecos').classList.add("desabilita");
+                }
+            });
+        }       
+    });
+</script>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,134 @@
+p {
+    border-bottom: 1px solid;
+    margin-bottom: 12px;
+}
+
+.perfil-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.perfil-container .perfil-info {
+    width: 50%;
+}
+
+.perfil-container .perfil-info h1 {
+    font-size: 2em;
+}
+
+.perfil-container .perfil-info p {
+    font-size: 1.5em;
+}
+
+.perfil-container .perfil-acoes {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    float: right;
+}
+
+.perfil-container .perfil-acoes .button {
+    display: block;
+    background-color: #f8bbd0;
+    /* altere para a cor desejada */
+    color: white;
+    /* altere para a cor desejada */
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.perfil-container .perfil-info .perfil-info-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.perfil-container .perfil-info .perfil-info-group div {
+    width: 45%;
+    margin-bottom: 20px;
+}
+
+.perfil-info-group div input {
+    width: 100%;
+    border-radius: 10px;
+    font-size: 20px;
+    FONT-WEIGHT: BOLD;
+    padding-left: 14px;
+    background-color: #e7e7e7;
+    border: 2px solid;
+}
+
+div#enderecos {
+    width: 100%;
+}
+
+.button-actions {
+    text-decoration: none !important;
+    text-decoration: none;
+    color: inherit !important;
+    padding: 12px 21px 12px 21px;
+    display: inline-block;
+    margin-left: 5px;
+    border: 1px solid white;
+    background-color: lightskyblue;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+label.rua {
+    font-size: 33px;
+    font-weight: bold;
+}
+
+.dados-endereco {
+    width: 90% !important;
+    float: left;
+    font-weight: bold;
+    padding: 11px;
+    background-color: #e7e7e7;
+    margin: 0px !important;
+    border-radius: 20px 0px 0px 20px;
+}
+
+.acoes-endereco {
+    width: 10% !important;
+    float: left;
+    background-color: #e7e7e7;
+    margin: 0px !important;
+    border-radius: 0px 20px 20px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.acoes-endereco img {
+    cursor: pointer;
+}
+
+.acao-endereco {
+    width: 45px;
+    margin-bottom: 14px;
+}
+
+#edita-endereco {
+    margin-top: 12px;
+}
+
+label.local {
+    font-size: 19px;
+}
+
+.div-endereco {
+    width: 64% !important;
+    display: flex;
+    border: 1px solid black;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.dados-endereco label {
+    width: 100% !important;
+    margin: 0px;
+}

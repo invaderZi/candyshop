@@ -1,0 +1,109 @@
+.container-dados{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+}
+#container-produtos{
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+img.img-prod {
+    width: 200px;
+    height: 155px;
+    float: left;
+}
+p {
+    border-bottom: 1px solid;
+    margin-bottom: 12px !important;
+    font-size: 1.7em;
+}
+
+.caixa {
+    width: 75% !important;
+    font-weight: bold;
+    padding: 11px;
+    background-color: #e7e7e7;
+    margin: 0px !important;
+    border-radius: 20px 20px 20px 20px;
+    border: 2px solid black;
+}
+
+.produtos {
+    border: 1px solid black;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.produto-item {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+.nome-produto{
+    font-weight: bold;
+    text-shadow: rgba(0, 0, 0, 0.65) 0px 1.3px 2.6px;
+    font-size: 20px;
+}
+
+img.img-prod {
+    box-shadow: rgba(0, 0, 0, 0.65) 0px 5px 15px;
+    margin-bottom: 7px;
+}
+
+label {
+    margin-bottom: 0px !important;
+}
+
+div#total {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-direction: column;
+    border: 1px solid;
+    padding: 18px;
+    font-weight: bold;
+    font-size: 21px;
+}
+
+.button-actions {
+    text-decoration: none !important;
+    text-decoration: none;
+    color: inherit !important;
+    padding: 9px 25px 9px 25px;
+    display: inline-block;
+    margin-left: 5px;
+    border: 1px solid white;
+    background-color: lightskyblue;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+div#action {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    flex-direction: column;
+    margin-top: 70px;
+}
+
+.container {
+    margin-top: 33px;
+}
+
+.dados div {
+    margin-top: 19px;
+}

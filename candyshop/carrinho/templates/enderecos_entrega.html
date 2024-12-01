@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'carrinho/css/enderecos_entrega.css' %}">
+
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="centered-text">
+    Endereços e entrega
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert {{message.tags}}" id="message">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+<form method="POST" action="{% url 'salvarretirada' %}">
+    {% csrf_token %}
+<div class="enderecos-entrega-container">
+    <div id="opcoes">
+        <div {% if not opcao_entrega or opcao_entrega.OpcaoSelecionada == 0 %}class="selected"{% endif %}>
+            <input type="radio" name="entregar_retirar" id="entregar" class="desabilita" value="0" {% if not opcao_entrega or opcao_entrega.OpcaoSelecionada == 0 %}checked{% endif %}><label>Entregar</label>
+        </div>
+        <div {% if opcao_entrega and opcao_entrega.OpcaoSelecionada == 1 %} class="selected"{% endif %}>
+            <input type="radio" name="entregar_retirar" id="retirarloja" class="desabilita" value="1" {% if opcao_entrega and opcao_entrega.OpcaoSelecionada == 1 %}checked{% endif %}><label>Retirar na loja</label>
+        </div>
+    </div>
+    <div id="corpo">
+        <div id="enderecos" {% if opcao_entrega and opcao_entrega.OpcaoSelecionada == 1 %}class="desabilita"{% endif %}>
+            {% for endereco in enderecos %}
+                <div class="endereco" class="form-group">
+                    <div class="option" lass="btn-group">
+                        <input type="radio" name="endereco" value="{{endereco.id}}" class="endereco-radio" {% if opcao_entrega and opcao_entrega.EnderecoCodigo.id == endereco.id %}checked{% endif %}>
+                    </div>
+                    <div class="dados-endereco">
+                        <label class="rua">Rua {{endereco.rua}}</label>
+                        <label class="local">{{endereco.cidade}}, {{endereco.get_estado_display}}, CEP: {{endereco.cep}}</label>
+                        <label class="local">Numero {{endereco.numero}}, {{endereco.complemento}}</label>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div id="retirada" {% if not opcao_entrega or opcao_entrega.OpcaoSelecionada == 0 %}class="desabilita"{% endif %}>
+            <label class="local retirada">Deverá se direcionar a loja candyshop para retirar seu produto</label>
+            <label class="local retirada">Endereço da loja:</label>
+            <label class="local retirada">Rua marechal deodoro, numero 543, ao lado da praça das ilusoes.</label>            
+        </div>
+        <div id="action">
+            <input class="button-actions" type="submit" value="Avancar">
+        </div>
+    </div>
+</div>
+</form>
+{% block 'javascript' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var divs = document.getElementById('opcoes').getElementsByTagName('div');
+
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].addEventListener('click', function() {
+                for (var j = 0; j < divs.length; j++) {
+                    divs[j].classList.remove('selected');
+                }
+                this.classList.add('selected');
+                this.getElementsByTagName('input')[0].checked = true
+                if(this.getElementsByTagName('input')[0].value == '0'){
+                    document.getElementById('enderecos').classList.remove("desabilita");
+                    document.getElementById('retirada').classList.add("desabilita");
+                }else{
+                    document.getElementById('retirada').classList.remove("desabilita");
+                    document.getElementById('enderecos').classList.add("desabilita");
+                }
+            });
+        }       
+    });
+</script>
+{% endblock %}
+{% endblock %}

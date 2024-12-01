@@ -1,0 +1,70 @@
+#myProgress {
+    width: 100%;
+    border: 1px solid;
+    height: 26px;
+    background-color: #ddd;
+}
+
+#myBar {
+    width: 10%;
+    height: 24px;
+    background-color: #00ff57;
+}
+
+.pedido-card {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: inset 0px -100px 100px -62px rgba(0,0,0,0.1);
+    padding-bottom: 16px;
+    align-items: center;
+}
+.dados {
+    display: flex;
+    flex-direction: column;
+    width: 82%;
+    margin-left: 31px;
+}
+.acao {
+    width: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.status {
+    display: flex;
+}
+div#myProgress {
+    margin-left: 15px;
+}
+.cancela-pedido {
+    width: 56px;
+}
+
+label {
+    margin: 0 !important;
+    font-size: 19px;
+    cursor: pointer;
+}
+label.descricao-status {
+    padding-left: 69px;
+}
+
+.pedido-id{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+div.tachar label {
+    text-decoration: line-through;
+}
+
+.imgBlur {
+    filter: blur(5px) !important;
+}
+
+.pedido-card>a {
+    width: 82%;
+    cursor: pointer;
+}

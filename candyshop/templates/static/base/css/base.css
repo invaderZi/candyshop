@@ -1,0 +1,22 @@
+body{
+    background-color: white
+}
+.box-icons {
+    position: relative;
+    right: 7px;
+}
+
+.qtd_icons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+
+

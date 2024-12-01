@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'favoritos/css/favoritos.css' %}">
+
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="centered-text">
+    Favoritos
+</div>
+  
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert {{message.tags}}" id="message">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="favoritos-container">
+    {% if produtos%}
+    {% for produto in produtos %}
+    <div class="favoritos-card">
+        <div>
+            {% with produto.imagens.all|first as imagem %}
+                {% if imagem %}
+                    <img class="img-prod" src="{{ imagem.imagem.url }}" alt="Imagem do Produto">
+                {% endif %}
+            {% endwith %}
+            <div class="favoritos-container-descricao">
+                <p class="favoritos-prod-nome">{{ produto.ProdutoNome }}</p>
+                <p class="favoritos-prod-descricao">{{ produto.ProdutoDescricao }}</p>
+            </div>
+        </div>
+        <div class="favoritos-actions">
+            <a href="{% url 'removefavorito' produto.ProdutoCodigo %}">
+                <img src="{% static 'favoritos/img/deleted.png' %}">
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <br>
+    <h1>Nenhum favorito adicionado!</h1>
+    {% endif %}
+</div>
+{% endblock %}

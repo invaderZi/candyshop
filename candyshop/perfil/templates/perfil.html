@@ -1,0 +1,101 @@
+{% extends 'base.html' %} {% load static %} {% block 'head' %}
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}" />
+<link rel="stylesheet" href="{% static 'perfil/css/perfil.css' %}" />
+<!-- Adicione o CSS do seu novo aplicativo aqui -->
+{% endblock %} {% block 'body' %}
+<div class="centered-text">Perfil</div>
+{% if messages %} {% for message in messages %}
+<div class="alert {{message.tags}}" id="message">{{message}}</div>
+{% endfor %} {% endif %}
+<br />
+<br />
+<form method="POST" action="{% url 'salvarPerfil'  perfil.id  %}">
+  {% csrf_token %}
+  <div class="perfil-container">
+    {% if perfil %}
+    <!-- Substitua 'perfil' pelo nome do seu objeto de perfil -->
+    <div class="perfil-info">
+      <div class="perfil-info-group">
+        <div>
+          <p>Nome:</p>
+          <input type="text" name="nome" value="{{ perfil.username }}" />
+        </div>
+        <div>
+          <p>Sobrenome:</p>
+          <input type="text" name="sobrenome" value="{{ perfil.sobrenome }}" />
+        </div>
+      </div>
+      <div class="perfil-info-group">
+        <div>
+          <p>Telefone:</p>
+          <input
+            type="tel"
+            name="telefone"
+            id=""
+            maxlength="20"
+            value="{{ perfil.telefone }}"
+          />
+        </div>
+        <div>
+          <p>E-mail:</p>
+          <input type="email" name="email" value="{{ perfil.email }}" />
+        </div>
+      </div>
+      <!-- Adicione mais campos conforme necessário -->
+      <div class="perfil-enderecos">
+        <div class="perfil-info-group">
+          <div id="enderecos">
+            <p>Endereços:</p>
+            {% for endereco in enderecos %}
+            <div class="div-endereco">
+              <div class="dados-endereco">
+                <label class="rua">Rua {{endereco.rua}}</label>
+                <label class="local"
+                  >{{endereco.cidade}}, {{endereco.get_estado_display}}, CEP:
+                  {{endereco.cep}}</label
+                >
+                <label class="local"
+                  >Numero {{endereco.numero}}, {{endereco.complemento}}</label
+                >
+              </div>
+              <div class="acoes-endereco">
+                <a href="{% url 'endereco' endereco.id %}">
+                  <img
+                    id="edita-endereco"
+                    class="acao-endereco"
+                    src="{% static 'perfil/img/edit_icon.png' %}"
+                  />
+                </a>
+                <br />
+                <a href="{% url 'delete' endereco.id %}">
+                  <img
+                    id="deleta-endereco"
+                    class="acao-endereco"
+                    src="{% static 'perfil/img/deleted.png' %}"
+                  />
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+            <div id="btn-novo-endereco">
+              <a class="button-actions" href="{% url 'endereco' 0 %}">
+                Adicionar novo endereço
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="perfil-acoes">
+        <input class="button-actions" type="submit" value="Salvar Perfil" />
+      </div>
+      <div class="perfil-acoes">
+        <a href="{% url 'sair' %}" class="button-actions">Sair</a>
+    </div>
+
+    {% else %}
+    <br />
+    <h1>Perfil não encontrado!</h1>
+    {% endif %}
+  </div>
+</form>
+{% endblock %}

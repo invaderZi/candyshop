@@ -1,0 +1,106 @@
+.desabilita {
+    display: none;
+}
+
+
+.enderecos-entrega-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#corpo {
+    width: 50%;
+    margin-top: 35px;
+}
+
+#opcoes {
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+}
+
+#opcoes div {
+    border: 3px solid black;
+    width: 252px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#opcoes label {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #03a4ff;
+}
+
+#enderecos {
+    width: 66%;
+    float: left;
+    border: 2px solid black;
+}
+
+#retirada {
+    width: 66%;
+    float: left;
+    border: 2px solid black;
+}
+
+#action {
+    float: right;
+}
+
+.option {
+    width: 6%;
+    float: left;
+    margin-left: 11px;
+    margin-top: 8px;
+}
+
+.dados-endereco {
+    width: 90%;
+    float: left;
+}
+
+label.local {
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+label.rua {
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.endereco {
+    display: flex;
+    box-shadow: inset 0px -100px 100px -62px rgba(0, 0, 0, 0.2);
+}
+
+#action input {
+    width: 100%;
+    background-color: lightskyblue;
+    color: white;
+    padding: 1px 30px 9px 35px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+label.retirada {
+    font-size: 22px !important;
+    margin-bottom: 0px;
+    padding-left: 14px;
+}
+
+input.endereco-radio {
+    cursor: pointer;
+}

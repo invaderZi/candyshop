@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="search-container">
+  <form method="POST" action="{% url 'search' %}">{% csrf_token %}
+    <input type="text" placeholder="Pesquisar" name="search">
+    <img src="{% static 'home/img/Search_Gray.png' %}">
+  </form>
+</div>
+
+{% if messages %}
+        {% for message in messages %}
+            <div class="alert {{message.tags}}" id="message">
+                {{message}}
+            </div>
+        {% endfor %}
+{% endif %}
+
+<div class="container">
+  {% if produtos%}
+  {% for produto in produtos %}
+  
+  
+  <div class="card">
+    {% with produto.imagens.all|first as imagem %}
+      {% if imagem %}
+        <img class="produtoImagem" prod-cod="{{produto.ProdutoCodigo}}" src="{{ imagem.imagem.url }}" alt="Imagem do Produto">
+      {% endif %}
+    {% endwith %}
+      <a href="{% url 'acessardetalhes' produto.ProdutoCodigo %}" style="display: block;">
+      <div class="container-descricao">      
+        <p class="prod-descricao">{{ produto.ProdutoNome }}</p>
+        <div class="line-price-actions">
+          <p class="prod-preco">R$ {{ produto.ProdutoValor }}</p>
+          <div class="actions">
+            <a href="{% url 'addfavorito' produto.ProdutoCodigo %}">
+              <img src="{% static 'home/img/add_favorite_icon.png' %}">
+            </a>
+            <a href="{% url 'addCarrinho' produto.ProdutoCodigo %}">
+              <img src="{% static 'home/img/add_car_icon.png' %}">
+            </a>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <script>
+    var imagens = document.querySelectorAll('.produtoImagem');
+    imagens.forEach(function(imagem) {
+        imagem.addEventListener('click', function() {
+            var produtoCodigo = this.getAttribute('prod-cod');
+            window.location.href = "/acessardetalhes/" + produtoCodigo;
+        });
+    });
+    </script>
+
+  {% endfor %}
+  {% else %}
+    <br>
+    <h1>Nenhum produto encontrado!</h1>
+  {% endif %}
+</div>
+{% endblock %}

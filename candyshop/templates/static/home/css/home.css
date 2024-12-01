@@ -1,0 +1,274 @@
+
+.bg_navbar{
+    background-color: lightskyblue;
+    padding: 0px !important;
+    
+}
+
+a{
+    text-decoration: none; 
+    color: inherit !important;
+}
+a:hover {
+    text-decoration: none !important;
+}
+.font_logo{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 34px;
+    display: inline;
+    color:white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.card_imovel{
+    background-color: #30CD9E;
+
+    width: 20rem;
+    margin-top: 50px;
+    border-radius: 26px;
+}
+
+.img_capa_imovel{
+
+    width: 100%;
+    border-top-left-radius: 26px;
+    border-top-right-radius: 26px;
+
+}
+
+.informacoes_imoveis{
+
+    padding: 20px;
+    color: white;
+
+}
+
+.valor{
+
+    font-weight: bold;
+    border-bottom: 1px solid white;
+}
+
+.btn_filtrar{
+
+    border: none;
+    background-color: transparent;
+    border: 2px solid #30CD9E;
+    color: #30CD9E;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+
+}
+
+.titulo_filtrar{
+
+    color:#30CD9E;
+    font-weight: bold;
+    font-size: 30px;
+
+}
+
+.btn_filtrar_modal{
+
+    border: none;
+    color: white;
+    background-color: #30CD9E;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+.a_none{
+
+    color: white;
+
+}
+
+.a_none:hover{
+
+    text-decoration: none;
+    color: white;
+
+}
+
+.titulo_especificacao{
+    color: #30CD9E;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 40px;
+
+}
+
+.especificacao{
+    font-size: 30px;
+    font-weight: bold;
+
+}
+
+.especificacao_endereco{
+    font-size: 25px;
+
+}
+
+.btn_agendar_visita{
+
+    border: none;
+    background-color: #30CD9E;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px 10px 5px 10px;
+
+}
+
+.div_possivel_interesse{
+
+    text-align: left;
+
+}
+
+.btn_agendar{
+
+    border: none;
+    background-color: #30CD9E;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px 10px 5px 10px;
+
+}
+
+.btn_agendar:hover{
+
+    text-decoration: none;
+    color: white;
+
+}
+
+.btnFavorites[type=submit] {
+    background: url(../img/heart.png);
+    border: 0;
+    display: block;
+    height: 20px;
+    width: 20px;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+}
+
+div#title { 
+    width: 100%;
+    text-align: center;
+    padding-left: 110px;
+}
+div#actions{
+    display: flex;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    flex: 1 0 21%; /* Onde 21% é a largura desejada do card */
+    margin: 1%; /* Espaçamento entre os cards */
+    max-width: 23%;
+    color: white;
+    background-color: black !important;
+    height: 310px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.container-descricao {
+    padding: 2px 6px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: 40%;
+}
+
+.card img{
+    min-height: 60%;
+    max-height: 60%;
+}
+
+.prod-descricao{
+    font-weight: bold;    
+    margin: 0;
+}
+
+.line-price-actions {
+    height: 40%;
+    width: 100%;
+}
+p.prod-preco{
+    margin: 0px;
+    font-size: 34px;
+    font-weight: bold;
+    float:left
+}
+
+.actions {
+    bottom: 15px;
+    right: 11px;
+    position: absolute;
+}
+
+.actions img {
+    width: 37px;
+    padding: 2px;
+    display: inline-block;
+    margin-left: 5px;
+    border: 1px solid white;
+    background-color: lightskyblue;
+}
+
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    padding: 9px;
+  }
+
+.search-container form {
+    position: relative;
+    width: 36%;
+    top: 5px;
+}
+
+.search-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    padding-left: 40px; /* Espaço para a imagem */
+    border: 2px solid;
+    border-radius: 14px;
+}
+
+.search-container img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 47px;
+    right: 10px;
+}
+
+.produtoImagem{
+    cursor: pointer
+}
+
+.centered-text {
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+div#message {
+    text-align: center;
+}

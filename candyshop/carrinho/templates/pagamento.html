@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'carrinho/css/enderecos_entrega.css' %}">
+
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="centered-text">
+    Pagamento
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert {{message.tags}}" id="message">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+<form method="POST" action="{% url 'salvarpagamento' %}">
+    {% csrf_token %}
+<div class="enderecos-entrega-container">
+    <div id="opcoes">
+        <div {% if not opcao_pagamento or opcao_pagamento.OpcaoSelecionada == 0 %}class="selected"{% endif %}>
+            <input type="radio" name="opcao_pagamento" id="entregar" class="desabilita" value="0" {% if not opcao_pagamento or opcao_pagamento.OpcaoSelecionada == 0 %}checked{% endif %}><label>Boleto</label>
+        </div>
+        <div {% if opcao_pagamento and opcao_pagamento.OpcaoSelecionada == 1 %} class="selected"{% endif %}>
+            <input type="radio" name="opcao_pagamento" id="retirarloja" class="desabilita" value="1" {% if opcao_pagamento and opcao_pagamento.OpcaoSelecionada == 1 %}checked{% endif %}><label>Pix</label>
+        </div>
+    </div>
+    <div id="corpo">
+        <div id="enderecos" {% if opcao_pagamento and opcao_pagamento.OpcaoSelecionada == 1 %}class="desabilita"{% endif %}>
+            <label class="local retirada">Metodo de pagamento escolhido: </label>
+            <label class="local retirada">Boleto</label>
+            <label class="local retirada">O boleto será enviado para o seu e-mail assim que finalizar sua compra</label>
+        </div>
+        <div id="retirada" {% if not opcao_pagamento or opcao_pagamento.OpcaoSelecionada == 0 %}class="desabilita"{% endif %}>
+            <label class="local retirada">Metodo de pagamento escolhido: </label>
+            <label class="local retirada">Pix</label>
+            <label class="local retirada">O Qr-Code do pix será exibido em um pop-up assim que finalizar sua compra</label>
+        </div>
+        <div id="action">
+            <input class="button-actions" type="submit" value="Avancar">
+        </div>
+    </div>
+</div>
+</form>
+{% block 'javascript' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var divs = document.getElementById('opcoes').getElementsByTagName('div');
+
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].addEventListener('click', function() {
+                for (var j = 0; j < divs.length; j++) {
+                    divs[j].classList.remove('selected');
+                }
+                this.classList.add('selected');
+                this.getElementsByTagName('input')[0].checked = true
+                if(this.getElementsByTagName('input')[0].value == '0'){
+                    document.getElementById('enderecos').classList.remove("desabilita");
+                    document.getElementById('retirada').classList.add("desabilita");
+                }else{
+                    document.getElementById('retirada').classList.remove("desabilita");
+                    document.getElementById('enderecos').classList.add("desabilita");
+                }
+            });
+        }       
+    });
+</script>
+{% endblock %}
+{% endblock %}

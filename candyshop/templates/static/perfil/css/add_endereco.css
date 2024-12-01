@@ -1,0 +1,58 @@
+.endereco-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.endereco-info {
+    width: 100%;
+}
+
+.endereco-info-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.endereco-info-group div {
+    width: 45%;
+    margin-bottom: 20px;
+}
+
+.endereco-info-group div input,select,textarea {
+    width: 100%;
+    border-radius: 10px;
+    font-size: 20px;
+    FONT-WEIGHT: BOLD;
+    padding-left: 14px;
+    background-color: #e7e7e7;
+    border: 2px solid;
+}
+
+label {
+    border-bottom: 1px solid;
+    margin-bottom: 12px !important;
+    width: 100%;
+    font-size: 1.5em;
+}
+
+div#complemento {
+    width: 100%;
+}
+
+.button-actions {
+    text-decoration: none !important;
+    text-decoration: none;
+    color: inherit !important;
+    padding: 12px 21px 12px 21px;
+    display: inline-block;
+    margin-left: 5px;
+    border: 1px solid white;
+    background-color: lightskyblue;
+    font-size: 25px;
+    font-weight: bold;
+}
+input.button-actions {
+    float: right;
+}
+

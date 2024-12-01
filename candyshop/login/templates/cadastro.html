@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'login/css/logar.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/cadastro.css' %}">
+{% endblock %}
+
+{% block 'titulo' %}Registre-se{% endblock %}
+
+{% block 'body' %}
+    <div class="container">
+      <div class="login-container">
+          <h2>Registre-se</h2>
+          {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {{message.tags}}" id="message">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+            {% endif %}
+            <br>
+            <form method="POST" action="{% url 'cadastro' %}">{% csrf_token %}
+                <div class="input-container">  
+                    <input type="text" name="nome" placeholder="Nome">
+                    <img id="img-email" src="{% static 'login/img/cadastro/Person_icon.png' %}">
+                </div>
+                <div class="input-container">  
+                    <input type="text" name="sobrenome" placeholder="Sobrenome">
+                    <img id="img-email" src="{% static 'login/img/cadastro/Person_icon.png' %}">
+                </div>
+                <div class="input-container">  
+                    <input type="text" name="telefone" placeholder="Telefone">
+                    <img id="img-phone" src="{% static 'login/img/cadastro/Phone_Icon.png' %}">
+                </div>
+                
+                <div class="input-container">  
+                    <input type="text" id="email" name="email" placeholder="E-mail">
+                    <img id="img-email" src="{% static 'login/img/E-mail_Icon_White-removebg.png' %}">
+                </div>
+                <div class="input-container">
+                    <input class="input-field" type="password" id="password" name="password" placeholder="Senha">
+                    <img src="{% static 'login/img/Password_Icon_bg.png' %}">
+                </div>     
+                <input type="submit" value="Registrar e logar">
+                <a href="{% url 'logar' %}">Já tem conta? Logar</a>
+            </form> 
+      </div>
+      <img class="cookie-image" src="{% static 'login/img/logocandyshop.png' %}">
+    </div>
+{% endblock %}

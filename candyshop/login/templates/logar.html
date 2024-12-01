@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'login/css/logar.css' %}">
+{% endblock %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'body' %}
+    <div class="container">
+      <div class="login-container">
+          <h2>Login</h2>
+            {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {{message.tags}}" id="message">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+            {% endif %}
+            <br>
+            <form method="POST" action="{% url 'logar' %}">{% csrf_token %}          
+            <div class="input-container">  
+                <input type="text" id="email" name="email" placeholder="E-mail">
+                <img id="img-email" src="{% static 'login/img/E-mail_Icon_White-removebg.png' %}">
+            </div><br>
+            <div class="input-container">
+                <input class="input-field" type="password" id="password" name="password" placeholder="Senha">
+                <img src="{% static 'login/img/Password_Icon_bg.png' %}">
+            </div><br>
+            <a href="{% url 'recuperar' %}">Esqueci minha senha</a>
+            <input type="submit" value="Logar">
+            <a href="{% url 'cadastro' %}">Criar uma nova conta</a>
+            </form> 
+      </div>
+      <img class="cookie-image" src="{% static 'login/img/logocandyshop.png' %}">
+    </div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'carrinho/css/carrinho.css' %}">
+
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="centered-text">
+    Carrinho
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert {{message.tags}}" id="message">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="carrinho-container">
+    {% if dados_carrinho%}
+    {% for produto_carrinho in dados_carrinho %}
+        <div class="carrinho-card">
+            <div class="infos-prods">
+                {% with produto_carrinho.ProdutoCodigo.imagens.all|first as imagem %}
+                    {% if imagem %}
+                        <img class="img-prod" src="{{ imagem.imagem.url }}" alt="Imagem do Produto">
+                    {% endif %}
+                {% endwith %}
+                        <div class="carrinho-container-descricao">
+                    <p class="carrinho-prod-descricao">{{ produto_carrinho.ProdutoCodigo.ProdutoNome }}</p>
+                    <p class="vlr-unit">Valor unitário: {{ produto_carrinho.ProdutoCodigo.ProdutoValor }}</p>
+                </div>
+                
+            </div>
+            <div>
+
+                <div class="combo-container">
+                    <div class="butonqtd">
+                        <a href="{% url 'decrementaqtd' produto_carrinho.ProdutoCodigo.ProdutoCodigo %}">
+                            <p class="combo-button">-</p>
+                        </a>
+                    </div>
+                    <input type="text" class="combo-input" value="{{ produto_carrinho.Quantidade }}">
+                    <div class="butonqtd">
+                        <a href="{% url 'incrementaqtd' produto_carrinho.ProdutoCodigo.ProdutoCodigo %}">
+                            <p class="combo-button">+</p>
+                        </a>
+                    </div> 
+                </div>
+                <div class="total-item">
+                    <p>Total do item:</p>
+                    <p class="price-total">R$ {{ produto_carrinho.total_por_produto  }}</p>
+                </div>
+            </div> 
+            <div class="carrinho-actions">
+                <a href="{% url 'removecarrinho' produto_carrinho.ProdutoCodigo.ProdutoCodigo %}">
+                    <img src="{% static 'carrinho/img/deleted.png' %}">
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="rodape">
+        <div class="total">
+            <p >Total do pedido: </p>
+            <p>R$ {{total_carrinho}}</p>
+        </div>
+        <a href="{% url 'enderecos_entrega' %}" value="Avançar">Avançar</a>
+    </div>
+    {% else %}
+    <br>
+    <h1>Nenhum produto adicionado ao carrinho!</h1>
+    {% endif %}
+</div>
+{% endblock %}
